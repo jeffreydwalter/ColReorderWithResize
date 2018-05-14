@@ -940,6 +940,7 @@ $.extend( ColReorder.prototype, {
 	{
 		var that = this;
 		var aoColumns = this.s.dt.aoColumns;
+		var bSort =  that.s.dt.oFeatures.bSort
 
 		// Rebind events since after column re-order they use wrong column indices.
 		$(nTh).off('.ColReorder');
@@ -957,7 +958,7 @@ $.extend( ColReorder.prototype, {
 					/* are we on the col border (if so, resize col) */     
 					if (Math.abs(e.pageX - Math.round(offset.left + nLength)) <= 5)
 					{
-						if (!aoColumns[i].bSortable === false)
+						if (!aoColumns[i].bSortable === false || bSort === false)
 						{
 							$(nThTarget).css({'cursor': 'col-resize'});
 						}
