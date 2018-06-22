@@ -4,6 +4,22 @@ ColReorderResize adds the ability for the end user to click and drag column head
 
 This repository is based on a no longer supported version of the ColReorderWithResize plugin. I basically updated it to work with the latest version of DataTables and fixed some long-standing issues with the plugin.
 
+There is an example of using this plugin here: https://www.gyrocode.com/articles/jquery-datatables-column-reordering-and-resizing
+
+Plug-in can be initialized multiple ways:
+
+Using dom option and adding character R.
+```
+var table = $('#example').DataTable({
+    'dom': 'Rlfrtip'
+});
+```
+Using new $.fn.dataTable.ColReorder().
+```
+var table = $('#example').DataTable();
+new $.fn.dataTable.ColReorder(table);
+```
+
 This plugin fires the following events:
 ```
 column-reorder.dt
