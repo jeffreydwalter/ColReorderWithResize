@@ -23,6 +23,7 @@ $('#datatable').on('column-resize.dt.mouseup', function(event, oSettings) {
 });
 ```
 Here is an example of capturing some reorder event:
+```
 $('#datatable').on('column-reorder.dt.mouseup', function(event, oSettings) {
     // Do something here.
 });
