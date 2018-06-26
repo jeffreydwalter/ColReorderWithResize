@@ -1591,21 +1591,21 @@ ColReorder.defaults = {
 	 */
 	allowResize: true,
 
-  /**
-   * As `classNameClonedTable` but counting from the right.
-   *  @type string
-   *  @default 'DTCR_clonedTable'
-   *  @static
-   */
-  classNameClonedTable: 'DTCR_clonedTable',
+	/**
+	* Classname added to cloned element
+	*  @type string
+	*  @default 'DTCR_clonedTable'
+	*  @static
+	*/
+	classNameClonedTable: 'DTCR_clonedTable',
 
-  /**
-   * As `classNamePointer` but counting from the right.
-   *  @type string
-   *  @default 'DTCR_pointer'
-   *  @static
-   */
-  classNamePointer: 'DTCR_pointer'
+	/**
+	* Classname added to the cloned element wrapper
+	*  @type string
+	*  @default 'DTCR_pointer'
+	*  @static
+	*/
+	classNamePointer: 'DTCR_pointer'
 };
 
 
