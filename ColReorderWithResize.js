@@ -711,7 +711,17 @@ $.extend( ColReorder.prototype, {
 		if ( this.s.init.iFixedColumnsLeft )
 		{
 			this.s.fixed = this.s.init.iFixedColumnsLeft;
-		}	
+		}
+
+    if ( this.s.init.classNameClonedTable )
+    {
+      this.s.classNameClonedTable = this.s.init.classNameClonedTable;
+    }
+
+    if ( this.s.init.classNamePointer )
+    {
+      this.s.classNamePointer = this.s.init.classNamePointer;
+    }
 		
 		/* Columns discounted from reordering - counting right to left */
 		this.s.fixedRight = this.s.init.iFixedColumnsRight ?
@@ -1436,7 +1446,7 @@ $.extend( ColReorder.prototype, {
 		// fastest and least resource intensive way I could think of cloning
 		// the table with just a single header cell in it.
 		this.dom.drag = $(origTable.cloneNode(false))
-			.addClass( 'DTCR_clonedTable' )
+			.addClass( this.s.classNameClonedTable )
 			.append(
 				$(origThead.cloneNode(false)).append(
 					$(origTr.cloneNode(false)).append(
@@ -1454,7 +1464,7 @@ $.extend( ColReorder.prototype, {
 			.appendTo( 'body' );
 
 		this.dom.pointer = $('<div></div>')
-			.addClass( 'DTCR_pointer' )
+			.addClass( this.s.classNamePointer )
 			.css( {
 				position: 'absolute',
 				top: scrolling ?
@@ -1579,7 +1589,23 @@ ColReorder.defaults = {
 	 *  @type     boolean
 	 *  @default  true
 	 */
-	allowResize: true
+	allowResize: true,
+
+  /**
+   * As `classNameClonedTable` but counting from the right.
+   *  @type string
+   *  @default 'DTCR_clonedTable'
+   *  @static
+   */
+  classNameClonedTable: 'DTCR_clonedTable',
+
+  /**
+   * As `classNamePointer` but counting from the right.
+   *  @type string
+   *  @default 'DTCR_pointer'
+   *  @static
+   */
+  classNamePointer: 'DTCR_pointer'
 };
 
 
