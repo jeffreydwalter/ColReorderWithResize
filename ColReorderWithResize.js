@@ -728,6 +728,11 @@ $.extend( ColReorder.prototype, {
     {
       this.s.classNameTableHeader = this.s.init.classNameTableHeader;
     }
+
+    if ( this.s.init.classNameTableHeaderHover )
+    {
+      this.s.classNameTableHeaderHover = this.s.init.classNameTableHeaderHover;
+    }
     
     /* Columns discounted from reordering - counting right to left */
     this.s.fixedRight = this.s.init.iFixedColumnsRight ?
@@ -956,7 +961,8 @@ $.extend( ColReorder.prototype, {
   {
     var that = this;
     var aoColumns = this.s.dt.aoColumns;
-    var bSort =  that.s.dt.oFeatures.bSort
+    var bSort =  that.s.dt.oFeatures.bSort;
+    var hoverClassname =  this.s.classNameTableHeaderHover;
 
     // Rebind events since after column re-order they use wrong column indices.
     $(nTh).off('.ColReorder');
@@ -977,10 +983,12 @@ $.extend( ColReorder.prototype, {
             if (!aoColumns[i].bSortable === false || bSort === false)
             {
               $(nThTarget).css({'cursor': 'col-resize'});
+              $(nThTarget).addClass( hoverClassname );
             }
           }
           else {                            
             $(nThTarget).css({'cursor': 'pointer'});
+            $(nThTarget).removeClass( hoverClassname );
           }
         }
       } );
@@ -1622,7 +1630,15 @@ ColReorder.defaults = {
   *  @default 'DTCR_tableHeader'
   *  @static
   */
-  classNameTableHeader: 'DTCR_tableHeader'
+  classNameTableHeader: 'DTCR_tableHeader',
+
+  /**
+  * Classname added to the resizable th when hovered
+  *  @type string
+  *  @default 'DTCR_tableHeaderHover'
+  *  @static
+  */
+  classNameTableHeaderHover: 'DTCR_tableHeaderHover'
 };
 
 
