@@ -962,7 +962,8 @@ $.extend( ColReorder.prototype, {
     var that = this;
     var aoColumns = this.s.dt.aoColumns;
     var bSort =  that.s.dt.oFeatures.bSort;
-    var hoverClassname =  this.s.classNameTableHeaderHover;
+    var tableHeaderHoverClassname =  this.s.classNameTableHeaderHover;
+    var tableHeaderClassname =  this.s.classNameTableHeader;
 
     // Rebind events since after column re-order they use wrong column indices.
     $(nTh).off('.ColReorder');
@@ -983,12 +984,14 @@ $.extend( ColReorder.prototype, {
             if (!aoColumns[i].bSortable === false || bSort === false)
             {
               $(nThTarget).css({'cursor': 'col-resize'});
-              $(nThTarget).addClass( hoverClassname );
+              $(nThTarget).removeClass( tableHeaderClassname );
+              $(nThTarget).addClass( tableHeaderHoverClassname );
             }
           }
           else {                            
             $(nThTarget).css({'cursor': 'pointer'});
-            $(nThTarget).removeClass( hoverClassname );
+            $(nThTarget).removeClass( tableHeaderHoverClassname );
+            $(nThTarget).addClass( tableHeaderClassname );
           }
         }
       } );
@@ -1500,11 +1503,8 @@ $.extend( ColReorder.prototype, {
    */
   "_fnSetColumnIndexes": function ()
   {
-    var columnClassname = this.s.classNameTableHeader;
-
     $.each( this.s.dt.aoColumns, function (i, column) {
       $(column.nTh).attr('data-column-index', i);
-      $(column.nTh).addClass( columnClassname );
     } );
   },
 
