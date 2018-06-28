@@ -1,7 +1,7 @@
 /**
  * @license
  * File:        ColReorderWithResize.js
- * Version:     2.0
+ * Version:     3.0
  * CVS:         $Id$
  * Description: Allow columns to be reordered in a DataTable
  * Author:      Allan Jardine (www.sprymedia.co.uk)
@@ -19,6 +19,8 @@
  * Modified:    June 2017 by Jeff Walter - jeffreydwalter@gmail.com
  *  1. ColReorder v1.3.3 adaptation.
  *  2. Fixed issues with column width calculations which allowed column headers to become misaligned with table body when using scroller plugin.
+ * Modified:    June 2018 by Jeff Walter - jeffreydwalter@gmail.com
+ *  1. Took a second stab at this plugin. Made things work for both scroller and non-scroller tables.
  * Language:    Javascript
  * License:     MIT
  * Project:     DataTables
