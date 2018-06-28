@@ -1,7 +1,7 @@
 {
   "name": "datatables.net-colresizewithreorder",
   "description": "ColReorderResize adds the ability for the end user to click and drag column headers to reorder and resize a table as they see fit",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "dependencies": {},
   "devDependencies": {}
 }
