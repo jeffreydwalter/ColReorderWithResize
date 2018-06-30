@@ -1617,7 +1617,7 @@ ColReorder.defaults = {
      *  @type     boolean
      *  @default  true
      */
-    allowResize: true
+    allowResize: true,
 
     /**
      * Classname added to cloned element
