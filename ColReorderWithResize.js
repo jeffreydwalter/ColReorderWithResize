@@ -987,12 +987,9 @@ $.extend( ColReorder.prototype, {
                     /* are we on the col border (if so, resize col) */
                     if (Math.abs(e.pageX - Math.round(offset.left + nLength)) <= 5)
                     {
-                        if (!aoColumns[i].bSortable === false || bSort === false)
-                        {
-                            $(nThTarget).css({'cursor': 'col-resize'});
-                            $(nThTarget).removeClass( tableHeaderClassname );
-                            $(nThTarget).addClass( tableHeaderHoverClassname );
-                        }
+                        $(nThTarget).css({'cursor': 'col-resize'});
+                        $(nThTarget).removeClass( tableHeaderClassname );
+                        $(nThTarget).addClass( tableHeaderHoverClassname );
                     }
                     else {
                         $(nThTarget).css({'cursor': 'pointer'});
@@ -1056,6 +1053,7 @@ $.extend( ColReorder.prototype, {
             this.s.mouse.nextStartWidth = $(nThNext).width();
             that.dom.resize = true;
             // Disable column sorting in order to avoid issues when finishing column resizing.
+            aoColumns[i].CRbSortableCache = aoColumns[i].bSortable;
             aoColumns[i].bSortable = false;
             // Disable Autowidth feature (now the user is in charge of setting column width so keeping this enabled looses changes after operations).
             this.s.dt.oFeatures.bAutoWidth = false;
@@ -1339,7 +1337,7 @@ $.extend( ColReorder.prototype, {
             var scrollXEnabled;
 
             //Re-enable column sorting
-            this.s.dt.aoColumns[colResized].bSortable = true;
+            this.s.dt.aoColumns[colResized].bSortable = this.s.dt.aoColumns[colResized].CRbSortableCache;
 
             //Save the new resized column's width
             this.s.dt.aoColumns[colResized].sWidth = $(this.s.mouse.resizeElem).width() + "px";
