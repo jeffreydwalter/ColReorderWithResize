@@ -765,7 +765,9 @@ $.extend( ColReorder.prototype, {
             }
 
             /* Mark the original column order for later reference */
-            this.s.dt.aoColumns[i]._ColReorder_iOrigCol = i;
+            if(this.s.dt.aoColumns[i]._ColReorder_iOrigCol === undefined){
+                this.s.dt.aoColumns[i]._ColReorder_iOrigCol = i;
+            }
         }
 
         /* State saving */
