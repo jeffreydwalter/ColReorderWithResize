@@ -1315,9 +1315,6 @@ $.extend( ColReorder.prototype, {
                 this.s.dt.oInstance.fnAdjustColumnSizing( false );
             }
 
-            // Re-initialize so as to register the new column order (otherwise the events remain bound to the original column indices).
-            this._fnConstruct();
-
             this.s.dt.oInstance.trigger('column-reorder.dt.mouseup', [ this.s.dt ] );
 
             /* Save the state */
