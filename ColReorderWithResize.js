@@ -696,13 +696,13 @@ $.extend( ColReorder.prototype, {
         var i;
 
         /* allow reorder */
-        if ( this.s.init.allowReorder )
+        if ( this.s.init.allowReorder != undefined)
         {
             this.s.allowReorder = this.s.init.allowReorder;
         }
 
         /* allow resize */
-        if ( this.s.init.allowResize )
+        if ( this.s.init.allowResize != undefined )
         {
             this.s.allowResize = this.s.init.allowResize;
         }
@@ -987,12 +987,9 @@ $.extend( ColReorder.prototype, {
                     /* are we on the col border (if so, resize col) */
                     if (Math.abs(e.pageX - Math.round(offset.left + nLength)) <= 5)
                     {
-                        if (!aoColumns[i].bSortable === false || bSort === false)
-                        {
-                            $(nThTarget).css({'cursor': 'col-resize'});
-                            $(nThTarget).removeClass( tableHeaderClassname );
-                            $(nThTarget).addClass( tableHeaderHoverClassname );
-                        }
+                        $(nThTarget).css({'cursor': 'col-resize'});
+                        $(nThTarget).removeClass( tableHeaderClassname );
+                        $(nThTarget).addClass( tableHeaderHoverClassname );
                     }
                     else {
                         $(nThTarget).css({'cursor': 'pointer'});
@@ -1031,6 +1028,21 @@ $.extend( ColReorder.prototype, {
             that = this,
         aoColumns = this.s.dt.aoColumns;
 
+
+        function addEventsHandler() {
+          /* Add event handlers to the document */
+          $(document)
+              .on( 'mousemove.ColReorder touchmove.ColReorder', function (e) {
+                  // Added index of the call being dragged or resized.
+                  that._fnMouseMove.call( that, e, i);
+              } )
+              .on( 'mouseup.ColReorder touchend.ColReorder', function (e) {
+                  // Added this small delay in order to prevent collision with column sort feature (there must be a better
+                  // way of doing this, but I don't have more time to digg into it).
+                  setTimeout(function() { that._fnMouseUp.call( that, e, i ); }, 10);
+              } );
+        }
+
         /* are we resizing a column ? */
         if ($(nTh).css('cursor') == 'col-resize') {
             this.s.mouse.startX = e.pageX;
@@ -1041,9 +1053,11 @@ $.extend( ColReorder.prototype, {
             this.s.mouse.nextStartWidth = $(nThNext).width();
             that.dom.resize = true;
             // Disable column sorting in order to avoid issues when finishing column resizing.
+            aoColumns[i].CRbSortableCache = aoColumns[i].bSortable;
             aoColumns[i].bSortable = false;
             // Disable Autowidth feature (now the user is in charge of setting column width so keeping this enabled looses changes after operations).
             this.s.dt.oFeatures.bAutoWidth = false;
+            addEventsHandler();
         }
         else if (this.s.allowReorder) {
             if (aoColumns[i].bReorderable === false) {
@@ -1069,19 +1083,9 @@ $.extend( ColReorder.prototype, {
             this.s.mouse.fromIndex = idx;
 
             this._fnRegions();
+            addEventsHandler();
         }
 
-        /* Add event handlers to the document */
-        $(document)
-            .on( 'mousemove.ColReorder touchmove.ColReorder', function (e) {
-                // Added index of the call being dragged or resized.
-                that._fnMouseMove.call( that, e, i);
-            } )
-            .on( 'mouseup.ColReorder touchend.ColReorder', function (e) {
-                // Added this small delay in order to prevent collision with column sort feature (there must be a better
-                // way of doing this, but I don't have more time to digg into it).
-                setTimeout(function() { that._fnMouseUp.call( that, e, i ); }, 10);
-            } );
     },
 
 
@@ -1311,9 +1315,6 @@ $.extend( ColReorder.prototype, {
                 this.s.dt.oInstance.fnAdjustColumnSizing( false );
             }
 
-            // Re-initialize so as to register the new column order (otherwise the events remain bound to the original column indices).
-            this._fnConstruct();
-
             this.s.dt.oInstance.trigger('column-reorder.dt.mouseup', [ this.s.dt ] );
 
             /* Save the state */
@@ -1333,7 +1334,7 @@ $.extend( ColReorder.prototype, {
             var scrollXEnabled;
 
             //Re-enable column sorting
-            this.s.dt.aoColumns[colResized].bSortable = true;
+            this.s.dt.aoColumns[colResized].bSortable = this.s.dt.aoColumns[colResized].CRbSortableCache;
 
             //Save the new resized column's width
             this.s.dt.aoColumns[colResized].sWidth = $(this.s.mouse.resizeElem).width() + "px";
