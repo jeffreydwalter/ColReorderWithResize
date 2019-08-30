@@ -1,12 +1,12 @@
 # ColReorderResize
 
+> I'm looking for people willing to contribute to this project as I no longer use dataTables and so don't have any motivation (or time) to maintain it. If you're insterested, please feel free to create pull-requests and I'll happily support your effort and help to get them merged in. Thanks!
+***
 ColReorderResize adds the ability for the end user to click and drag column headers to reorder and resize a table as they see fit, to DataTables. See the [documentation](http://legacy.datatables.net/extras/thirdparty/ColReorderWithResize/) for full details.
 
 This repository is based on a no longer supported version of the ColReorderWithResize plugin. I basically updated it to work with the latest version of DataTables and fixed some long-standing issues with the plugin.
 
 There is an example of using this plugin here: https://www.gyrocode.com/articles/jquery-datatables-column-reordering-and-resizing
-
-# I'm looking for people willing to contribute to this project as I no longer use dataTables and so don't have any motivation (or time) to maintain it. If you're insterested, please feel free to create pull-requests and I'll happily support your effort and help to get them merged in. Thanks!
 
 Plug-in can be initialized multiple ways:
 
