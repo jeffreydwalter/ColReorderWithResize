@@ -1036,10 +1036,10 @@ $.extend( ColReorder.prototype, {
                   // Added index of the call being dragged or resized.
                   that._fnMouseMove.call( that, e, i);
               } )
-              .on( 'mouseup.ColReorder touchend.ColReorder', function (e) {
-                  // Added this small delay in order to prevent collision with column sort feature (there must be a better
-                  // way of doing this, but I don't have more time to digg into it).
-                  setTimeout(function() { that._fnMouseUp.call( that, e, i ); }, 10);
+              .on( 'mouseup.ColReorder touchend.ColReorder', function (e) {                  
+                  e.preventDefault();
+                  e.stopPropagation();
+                  that._fnMouseUp.call( that, e, i );
               } );
         }
 
@@ -1394,6 +1394,7 @@ $.extend( ColReorder.prototype, {
         }
 
         this.dom.resize = null;
+        return false;
     },
 
 
