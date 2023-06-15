@@ -818,6 +818,8 @@ $.extend( ColReorder.prototype, {
         // Destroy clean up
         $(table).on( 'destroy.dt.colReorder', function () {
             $(table).off( 'destroy.dt.colReorder draw.dt.colReorder' );
+            if (that.s === null) return;
+
             $(that.s.dt.nTHead).find( '*' ).off( '.ColReorder' );
 
             $.each( that.s.dt.aoColumns, function (i, column) {
@@ -899,6 +901,8 @@ $.extend( ColReorder.prototype, {
      */
     "_fnStateSave": function ( oState )
     {
+        if (this.s === null) return;
+
         var i, iLen, aCopy, iOrigColumn;
         var oSettings = this.s.dt;
         var columns = oSettings.aoColumns;
