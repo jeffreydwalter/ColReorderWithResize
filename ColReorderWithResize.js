@@ -1028,6 +1028,7 @@ $.extend( ColReorder.prototype, {
             that = this,
         aoColumns = this.s.dt.aoColumns;
 
+        var col = parseInt($(nTh).attr('data-column-index'), 10); if (!isNaN(col)) { i = col; }
 
         function addEventsHandler() {
           /* Add event handlers to the document */
